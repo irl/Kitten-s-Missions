@@ -21,6 +21,9 @@ class Items:
 		for i in self.list:
 			if i.g == 0:
 				i.update(level)
+	def reset(self):
+		for i in self.list:
+			i.g = 0
 
 class Level:
 	def __init__(self, name, background, player, start, end, rest, itemImage, itemName, itemCount, music, noise, explode, loss, win, obstacles = []):
@@ -53,7 +56,7 @@ class Level:
 		if showText:
 			font = pygame.font.Font(None, 36)
 			text = font.render("%s Collected: %d" % (self.itemName, self.g), 1, (0, 0, 0))
-			screen.blit(text, (410,0))
+			screen.blit(text, (350,0))
 
 		if showPlayer:
 			screen.blit(self.player, (295, self.y))
@@ -93,7 +96,9 @@ class Level:
 			self.y = 175
 			self.xv = 0
 			self.yv = 0
+
 			self.g = 0
+			self.items.reset()
 	
 			pygame.event.clear()
 
@@ -176,10 +181,10 @@ class Level:
 				screen.blit(text, (30,170))
 			else:
 				text = font.render("You collected %d %s. That's %d each with %d leftover!" % (self.g, self.itemName, self.g / 4, self.g % 4), 1, (0, 0, 0))
-				screen.blit(text, (10,170))
+				screen.blit(text, (5,170))
 
 				notwon = 0
 	
 			pygame.display.flip()
 	
-			pygame.time.wait(2000)
+			pygame.time.wait(5000)
