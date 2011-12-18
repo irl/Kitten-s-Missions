@@ -1,6 +1,7 @@
 
 import pygame
 import random
+import sys
 
 class Item:
 	def __init__(self, minx, maxx):
@@ -74,19 +75,24 @@ class Level:
 		return 0
 
 	def doIntro(self, screen):
+		pygame.display.set_caption(self.name)
 		running = 1
 		self.render(screen, 0, 0)
 		pygame.display.flip()
 		pygame.time.wait(500)
 		while self.x < self.start:
+			event = pygame.event.poll()
+			if event.type == pygame.KEYUP:
+				if event.key == pygame.K_SPACE:
+					self.x = self.start
+			elif event.type == pygame.QUIT:
+				sys.exit(0)
 			self.render(screen, 0, 0)
 			pygame.display.flip()	
 			self.x += 2
 			pygame.time.wait(1)
 
 	def doPlay(self, screen):
-		self.music.play(-1)
-	
 		notwon = 1
 
 		while notwon:
@@ -101,6 +107,8 @@ class Level:
 			self.items.reset()
 	
 			pygame.event.clear()
+
+			self.music.play(-1)
 
 			while running:
 				event = pygame.event.poll()
@@ -157,6 +165,8 @@ class Level:
 								if event.key == pygame.K_SPACE:
 									running = 0
 									break
+							elif event.type == pygame.QUIT:
+								sys.exit(0)
 						if running == 0:
 							break
 
