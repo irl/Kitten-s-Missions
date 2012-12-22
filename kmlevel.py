@@ -2,6 +2,7 @@
 import pygame
 import random
 import sys
+import openni
 
 class Item:
 	def __init__(self, minx, maxx):
@@ -26,6 +27,24 @@ class Items:
 		for i in self.list:
 			i.g = 0
 
+
+def getClosestPoint(depthMap):
+
+	width = depthMap.width
+	height = depthMap.height
+
+	closest = (-1, -1, -1)
+
+	closestDepth = 999999
+
+	for x in range(1, width, 4):
+		for y in range(1, height, 3):
+			if depthMap[x, y] < closestDepth and depthMap[x,y] is not 0:
+				closestDepth = depthMap[x, y]
+				closest = (x, y, depthMap[x, y])
+
+	return closest
+
 class Level:
 	def __init__(self, name, background, player, start, end, rest, itemImage, itemName, itemCount, music, noise, explode, loss, win, obstacles = []):
 		self.name = name
@@ -48,6 +67,13 @@ class Level:
 		self.xv = 0
 		self.yv = 0
 		self.g = 0 #items collected in this level
+		self.ctx = openni.Context()
+		self.ctx.init()
+		self.depth = openni.DepthGenerator()
+		self.depth.create(self.ctx)
+		self.depth.set_resolution_preset(openni.RES_QVGA)
+		self.depth.fps = 30
+		self.ctx.start_generating_all()
 
 	def render(self, screen, showText = 1, showPlayer = 1):
 		global pygame
@@ -130,6 +156,9 @@ class Level:
 		
 				self.x += self.xv
 				self.y += self.yv
+
+				tmpx, self.y, tmpz = getClosestPoint(self.depth.map)
+
 				if self.y > 330:
 					self.y = 330
 				if self.y < 0:

@@ -34,7 +34,7 @@ if __name__ == "__main__":
 		pygame.time.wait(10000)
 		
 
-		levels = [Level("Beer Run", get_image('bg.png'), get_image('images.png'), 1800, 3150, 3410, get_image('beer.png'), "Beers", 8, get_sound('music.ogg'), get_sound('meow.ogg'), get_image('explode.png'), get_image('loss.png'), get_image('win.png')), Level("Drunken Munch", get_image('bg2.png'), get_image('images.png'), 1000, 3150, 3390, get_image('kebab.png'), "Kebabs", 8, get_sound('music.ogg'), get_sound('meow.ogg'), get_image('explode.png'), get_image('loss.png'), get_image('win.png'), [(1470, 144, 1580, 400), (2087, 144, 2200, 400), (2689, 0, 2796, 202)]), Level("Must Drink Water", get_image('bg3.png'), get_image('images.png'), 2720, 12255, 12428, get_image('water.png'), "Waters", 50, get_sound('music.ogg'), get_sound('meow.ogg'), get_image('explode.png'), get_image('loss.png'), get_image('win.png'), [(3334,130,3511,197),(3950,257,4132,305),(4390,104,4570,153),(4887,100,5068,150),(4985,294,5169,345),(5548,96,5734,145),(5967,202,6147,255),(7091,101,7269,152),(8169,266,8352,134),(9733,97,9914,146),(10554,282,10736,332),(11414,85,11600,134),(11960,273,12145,327)])]
+		levels = [Level("Beer Run", get_image('bg.png'), get_image('images.png'), 1800, 3150, 3410, get_image('beer.png'), "Beers", 8, get_sound('music.ogg'), get_sound('meow.ogg'), get_image('explode.png'), get_image('loss.png'), get_image('win.png')), Level("Drunken Munch", get_image('bg2.png'), get_image('images.png'), 1000, 3150, 3390, get_image('kebab.png'), "Kebabs", 8, get_sound('music.ogg'), get_sound('meow.ogg'), get_image('explode.png'), get_image('loss.png'), get_image('win.png'), [(1470, 144, 1580, 400), (2087, 144, 2200, 400), (2689, 0, 2796, 202)])]
 
 		for level in levels:
 			level.doIntro(screen)
